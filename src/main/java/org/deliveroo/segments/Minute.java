@@ -3,8 +3,8 @@ package org.deliveroo.segments;
 public class Minute extends Base {
     public Minute(String segment) {
         super();
+        this.minimumValue = 0; // Minutes are from 0 to 59
         this.maximumValue = 59;
-        this.minimumValue = 0;
         this.segment = segment;
     }
 }
