@@ -2,6 +2,7 @@ package org.deliveroo.parser;
 
 import org.deliveroo.segments.Base;
 
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.IntStream;
 
 import static org.deliveroo.constants.Separator.RANGE;
 
+@Singleton
 public class CronFieldRangeExpander extends CronFieldExpander {
     @Override
     public List<String> expandField(Base base) {
