@@ -1,17 +1,17 @@
 package org.deliveroo.parser;
 
+import org.deliveroo.segments.Base;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CronFieldWildcardExpander extends CronFieldExpander {
     @Override
-    public List<String> expandField(String field, Integer min, Integer max) {
-        List<String> result = new ArrayList<>();
-
-        for (int i = min; i <= max; i++) {
-            result.add(String.valueOf(i));
-        }
-
-        return result;
+    public List<String> expandField(Base base) {
+        return IntStream.rangeClosed(base.getMinimumValue(), base.getMaximumValue())
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
     }
 }

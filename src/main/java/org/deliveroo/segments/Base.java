@@ -33,6 +33,6 @@ public abstract class Base {
             expander = INDIVIDUAL_EXPANDER;
         }
 
-        return expander.expandField(this.getSegment(), this.getMinimumValue(), this.getMaximumValue());
+        return expander.expandField(this);
     }
 }

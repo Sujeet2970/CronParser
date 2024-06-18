@@ -1,21 +1,25 @@
 package org.deliveroo.parser;
 
+import org.deliveroo.segments.Base;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.deliveroo.constants.Separator.RANGE;
 
 public class CronFieldRangeExpander extends CronFieldExpander {
     @Override
-    public List<String> expandField(String field, Integer min, Integer max) {
-        List<String> result = new ArrayList<>();
-        String[] range = field.split(RANGE);
-        int start = Integer.parseInt(range[0]);
-        int end = Integer.parseInt(range[1]);
+    public List<String> expandField(Base base) {
+        List<String> result;
+        String[] range = base.getSegment().split(RANGE);
+        int startValue = Integer.parseInt(range[0]);
+        int endValue = Integer.parseInt(range[1]);
 
-        for (int i = start; i <= end; i++) {
-            result.add(String.valueOf(i));
-        }
+        result = IntStream.rangeClosed(startValue, endValue)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
 
         return result;
     }
