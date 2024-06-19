@@ -2,13 +2,11 @@ package org.deliveroo.parser;
 
 import org.deliveroo.segments.Base;
 
-import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.deliveroo.constants.Separator.*;
 
-@Singleton
 public class CronFieldStepExpander extends CronFieldExpander {
     @Override
     public List<String> expandField(Base base) {

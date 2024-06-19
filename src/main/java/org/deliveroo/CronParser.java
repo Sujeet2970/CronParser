@@ -21,7 +21,7 @@ public class CronParser {
         try {
             parseString(parts);
         } catch (Exception ex) {
-            System.out.println("Error in parsing the given strings");
+            System.out.println("Error in parsing the given string");
         }
     }
 

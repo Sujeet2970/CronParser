@@ -2,11 +2,9 @@ package org.deliveroo.parser;
 
 import org.deliveroo.segments.Base;
 
-import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
 public class CronFieldWildcardExpander extends CronFieldExpander {
     @Override
     public List<String> expandField(Base base) {
