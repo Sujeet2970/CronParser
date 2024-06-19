@@ -1,4 +1,4 @@
-package org.deliveroo.parser;
+package org.deliveroo.expander;
 
 import org.deliveroo.segments.Base;
 
