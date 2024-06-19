@@ -14,6 +14,7 @@ public abstract class Base {
     private static final CronFieldExpander STEP_EXPANDER = new CronFieldStepExpander();
     private static final CronFieldExpander INDIVIDUAL_EXPANDER = new CronFieldIndividualExpander();
 
+    protected String segmentIdentity;
     protected Integer minimumValue;
     protected Integer maximumValue;
     protected String segment;

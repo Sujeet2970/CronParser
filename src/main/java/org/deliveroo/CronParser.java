@@ -1,8 +1,11 @@
 package org.deliveroo;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.deliveroo.formatter.CronFieldFormatter;
 import org.deliveroo.segments.*;
+
+import java.util.logging.Logger;
 
 import static org.deliveroo.constants.Columns.*;
 import static org.deliveroo.constants.Separator.SPACE;
@@ -28,7 +31,7 @@ public class CronParser {
         try {
             return parseString(parts);
         } catch (Exception ex) {
-            System.out.println("Error in parsing the given string");
+            System.out.println(ex.toString());
 
             return "Error in parsing the given string";
         }

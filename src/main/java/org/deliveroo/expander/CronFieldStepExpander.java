@@ -1,11 +1,13 @@
 package org.deliveroo.expander;
 
+import org.deliveroo.exception.OutOfRangeException;
 import org.deliveroo.segments.Base;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.deliveroo.constants.Separator.*;
+import static org.deliveroo.util.ValidateValue.isValueInRange;
 
 public class CronFieldStepExpander extends CronFieldExpander {
     @Override
@@ -19,6 +21,9 @@ public class CronFieldStepExpander extends CronFieldExpander {
         int rangeEnd = range.equals(WILDCARD) ? base.getMaximumValue() : Integer.parseInt(range.split(RANGE)[1]);
 
         for (int value = rangeStart; value <= rangeEnd; value += step) {
+            if(!isValueInRange(value, base.getMinimumValue(), base.getMaximumValue())) {
+                throw new OutOfRangeException(base.getSegmentIdentity(), value);
+            }
             result.add(String.valueOf(value));
         }
 
