@@ -1,18 +1,21 @@
 package org.deliveroo.parser;
 
-import com.google.inject.Singleton;
 import org.deliveroo.segments.Base;
 
+import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Singleton
 public class CronFieldWildcardExpander extends CronFieldExpander {
     @Override
     public List<String> expandField(Base base) {
-        return IntStream.rangeClosed(base.getMinimumValue(), base.getMaximumValue())
-                .mapToObj(String::valueOf)
-                .collect(Collectors.toList());
+        List<String> result = new ArrayList<>();
+
+        for (int value = base.getMinimumValue(); value <= base.getMaximumValue(); value++) {
+            result.add(String.valueOf(value));
+        }
+
+        return result;
     }
 }

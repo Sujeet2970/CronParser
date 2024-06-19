@@ -5,8 +5,6 @@ import org.deliveroo.segments.Base;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.deliveroo.constants.Separator.*;
 
@@ -14,7 +12,7 @@ import static org.deliveroo.constants.Separator.*;
 public class CronFieldStepExpander extends CronFieldExpander {
     @Override
     public List<String> expandField(Base base) {
-        List<String> result;
+        List<String> result = new ArrayList<>();
 
         String[] parts = base.getSegment().split(STEP);
         int step = Integer.parseInt(parts[1]);
@@ -22,9 +20,9 @@ public class CronFieldStepExpander extends CronFieldExpander {
         int rangeStart = range.equals(WILDCARD) ? base.getMinimumValue() : Integer.parseInt(range.split(RANGE)[0]);
         int rangeEnd = range.equals(WILDCARD) ? base.getMaximumValue() : Integer.parseInt(range.split(RANGE)[1]);
 
-        result = IntStream.iterate(rangeStart, i -> i <= rangeEnd, i -> i + step)
-                .mapToObj(String::valueOf)
-                .collect(Collectors.toList());
+        for (int value = rangeStart; value <= rangeEnd; value += step) {
+            result.add(String.valueOf(value));
+        }
 
         return result;
     }
