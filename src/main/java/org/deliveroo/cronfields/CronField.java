@@ -1,4 +1,4 @@
-package org.deliveroo.segments;
+package org.deliveroo.cronfields;
 
 import lombok.Getter;
 import org.deliveroo.expander.*;
@@ -8,7 +8,7 @@ import java.util.List;
 import static org.deliveroo.constants.Separator.*;
 
 @Getter
-public abstract class Base {
+public abstract class CronField {
     private static final CronFieldExpander WILDCARD_EXPANDER = new CronFieldWildcardExpander();
     private static final CronFieldExpander RANGE_EXPANDER = new CronFieldRangeExpander();
     private static final CronFieldExpander STEP_EXPANDER = new CronFieldStepExpander();

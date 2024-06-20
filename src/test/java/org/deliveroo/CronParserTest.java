@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CronParserTest {
     @Test
     public void testSimpleCronExpression() {
-        assertEquals(new CronParser("0-59/15 0 1,5 * 1-5 /usr/bin/find").parseAndGetCronString(),
+        assertEquals(new CronParser("0-59/15 0 1,5 * 1-5 /usr/bin/find").parse(),
                 """
                         minute         0 15 30 45
                         hour           0
@@ -22,7 +22,7 @@ public class CronParserTest {
 
     @Test
     public void testCronExpressionWithComplexLists() {
-        assertEquals(new CronParser("0-59/15 0 1-5,1-15 * 1-5 /usr/bin/find").parseAndGetCronString(),
+        assertEquals(new CronParser("0-59/15 0 1-5,1-15 * 1-5 /usr/bin/find").parse(),
                 """
                         minute         0 15 30 45
                         hour           0

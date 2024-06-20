@@ -2,7 +2,7 @@ package org.deliveroo;
 
 public class Main {
     public static void main(String[] args) {
-        args = new String[]{"*/15 0 1,15 * 1-5 /usr/bin/find"};
+        args = new String[]{"*/15 0 1,15 * 5-3 /usr/bin/find"};
 //        if (args.length != 1) {
 //            System.err.println("Usage: java org.deliveroo.CronParser \"<cron string>\"");
 //            System.exit(1);
@@ -10,6 +10,6 @@ public class Main {
 
         String cronString = args[0];
         CronParser parser = new CronParser(cronString);
-        System.out.println(parser.parseAndGetCronString());
+        System.out.println(parser.parse());
     }
 }
