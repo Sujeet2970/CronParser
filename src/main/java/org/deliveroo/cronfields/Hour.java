@@ -1,8 +1,8 @@
-package org.deliveroo.segments;
+package org.deliveroo.cronfields;
 
 import static org.deliveroo.constants.Columns.HOUR;
 
-public class Hour extends Base {
+public class Hour extends CronField {
     public Hour(String segment) {
         super();
         this.minimumValue = 0; // Hours are from 0 to 23

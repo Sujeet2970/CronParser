@@ -1,8 +1,8 @@
-package org.deliveroo.segments;
+package org.deliveroo.cronfields;
 
 import static org.deliveroo.constants.Columns.DAY_OF_MONTH;
 
-public class DaysOfMonth extends Base {
+public class DaysOfMonth extends CronField {
     public DaysOfMonth(String segment) {
         super();
         this.minimumValue = 0; // Days of month are from 1 to 31
