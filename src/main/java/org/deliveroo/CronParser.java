@@ -15,7 +15,7 @@ import java.util.Map;
 import static org.deliveroo.constants.Columns.MONTH;
 import static org.deliveroo.constants.Columns.DAY_OF_MONTH;
 import static org.deliveroo.constants.Columns.MINUTE;
-import static org.deliveroo.constants.Columns.DAY_OF_WEEK;
+import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
 import static org.deliveroo.constants.Columns.HOUR;
 import static org.deliveroo.constants.Columns.COMMAND;
 import static org.deliveroo.constants.Separator.SPACE;
@@ -31,7 +31,7 @@ public class CronParser {
     private static final Integer COMMAND_PART_INDEX = 5;
     private static final Integer SEGMENT_LIMIT = 6;
     private static final Map<String, List<String>> displayString = new HashMap<>();
-    private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAY_OF_WEEK);
+    private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAYS_OF_WEEK);
 
     private final String cronString;
 
@@ -62,7 +62,7 @@ public class CronParser {
         displayString.put(HOUR, new Hour(hourPart).expandField());
         displayString.put(DAY_OF_MONTH, new DaysOfMonth(dayOfMonthPart).expandField());
         displayString.put(MONTH, new Month(monthPart).expandField());
-        displayString.put(DAY_OF_WEEK, new DaysOfWeek(dayOfWeekPart).expandField());
+        displayString.put(DAYS_OF_WEEK, new DaysOfWeek(dayOfWeekPart).expandField());
 
         StringBuilder displayContent = new StringBuilder();
         for(String field : DISPLAY_ORDER) {

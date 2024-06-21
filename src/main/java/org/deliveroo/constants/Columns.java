@@ -5,6 +5,6 @@ public class Columns {
     public static final String HOUR = "hour";
     public static final String DAY_OF_MONTH = "day of month";
     public static final String MONTH = "month";
-    public static final String DAY_OF_WEEK = "day of week";
+    public static final String DAYS_OF_WEEK = "day of week";
     public static final String COMMAND = "command";
 }
