@@ -2,22 +2,13 @@ package org.deliveroo;
 
 import lombok.RequiredArgsConstructor;
 
-import org.deliveroo.cronfields.Month;
-import org.deliveroo.cronfields.Hour;
-import org.deliveroo.cronfields.Minute;
-import org.deliveroo.cronfields.DaysOfWeek;
-import org.deliveroo.cronfields.DaysOfMonth;
+import org.deliveroo.cronfields.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.deliveroo.constants.Columns.MONTH;
-import static org.deliveroo.constants.Columns.DAY_OF_MONTH;
-import static org.deliveroo.constants.Columns.MINUTE;
-import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
-import static org.deliveroo.constants.Columns.HOUR;
-import static org.deliveroo.constants.Columns.COMMAND;
+import static org.deliveroo.constants.Columns.*;
 import static org.deliveroo.constants.Separator.SPACE;
 import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
 
@@ -40,10 +31,11 @@ public class CronParser {
     private static final Integer DAY_OF_MONTH_PART_INDEX = 2;
     private static final Integer MONTH_PART_INDEX = 3;
     private static final Integer DAY_OF_WEEK_PART_INDEX = 4;
-    private static final Integer COMMAND_PART_INDEX = 5;
-    private static final Integer SEGMENT_LIMIT = 6;
+    private static final Integer COMMAND_PART_INDEX = 6;
+    private static final Integer YEAR_PART_INDEX = 5;
+    private static final Integer SEGMENT_LIMIT = 7;
     private static final Map<String, List<String>> displayString = new HashMap<>();
-    private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAYS_OF_WEEK);
+    private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAYS_OF_WEEK, YEAR);
 
     private final String cronString;
 
@@ -75,6 +67,7 @@ public class CronParser {
         String dayOfMonthPart = parts[DAY_OF_MONTH_PART_INDEX];
         String monthPart = parts[MONTH_PART_INDEX];
         String dayOfWeekPart = parts[DAY_OF_WEEK_PART_INDEX];
+        String yearPart = parts[YEAR_PART_INDEX];
         String command = parts[COMMAND_PART_INDEX];
 
         displayString.put(MINUTE, new Minute(minutePart).expandField());
@@ -82,6 +75,7 @@ public class CronParser {
         displayString.put(DAY_OF_MONTH, new DaysOfMonth(dayOfMonthPart).expandField());
         displayString.put(MONTH, new Month(monthPart).expandField());
         displayString.put(DAYS_OF_WEEK, new DaysOfWeek(dayOfWeekPart).expandField());
+        displayString.put(YEAR, new Year(yearPart).expandField());
 
         StringBuilder displayContent = new StringBuilder();
         for(String field : DISPLAY_ORDER) {
@@ -91,5 +85,39 @@ public class CronParser {
         displayContent.append(getFormattedRowData(COMMAND, command));
 
         return displayContent.toString();
+    }
+
+    public String parseAndGetNthOccurrenceTime(Integer n) {
+        System.out.println(this.parse());
+
+        int count = 0;
+
+        for(int i = 0; i < displayString.get(YEAR).size(); i++) {
+            for(int j = 0; j < displayString.get(MONTH).size(); j++) {
+                for(int k = 0; k < displayString.get(DAY_OF_MONTH).size(); k++) {
+                    int p = (Integer.parseInt(displayString.get(DAY_OF_MONTH).get(k)) % 7);
+                    if(!displayString.get(DAYS_OF_WEEK).contains(Integer.toString(p))) {
+                        continue;
+                    }
+                    for (int l = 0; l < displayString.get(HOUR).size(); l++) {
+                        for (int m = 0; m < displayString.get(MINUTE).size(); m++) {
+                            count++;
+
+                            if(count == n) {
+
+                                StringBuilder displayContent = new StringBuilder();
+                                String s = displayString.get(YEAR).get(i) + " " + displayString.get(MONTH).get(j) + " "
+                                        + displayString.get(DAY_OF_MONTH).get(k) + " " + displayString.get(HOUR).get(l) + " "
+                                        + displayString.get(MINUTE).get(m);
+
+                                System.out.println(s);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        return "";
     }
 }

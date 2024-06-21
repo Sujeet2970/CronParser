@@ -10,5 +10,6 @@ public class Main {
         String cronString = args[0];
         CronParser parser = new CronParser(cronString);
         System.out.println(parser.parse());
+        parser.parseAndGetNthOccurrenceTime(5);
     }
 }
