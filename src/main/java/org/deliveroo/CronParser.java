@@ -55,7 +55,7 @@ public class CronParser {
      *
      * @return the formatted string or an error message if the cron string is invalid.
      */
-    public String parse() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException{
+    public String parse() throws IllegalArgumentException {
         String[] parts = cronString.split(SPACE, SEGMENT_LIMIT);
         if (parts.length != SEGMENT_LIMIT) {
             return new IllegalArgumentException("Invalid cron string format.").toString();
