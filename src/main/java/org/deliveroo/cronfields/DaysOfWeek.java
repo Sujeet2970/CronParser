@@ -5,8 +5,8 @@ import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
 public class DaysOfWeek extends CronField {
     public DaysOfWeek(String segment) {
         super();
-        this.minimumValue = 1; // Days of week are from 1 (Monday) to 7 (Sunday)
-        this.maximumValue = 7;
+        this.minimumValue = 0; // Days of week are from 0 (Sunday) to 6 (Saturday)
+        this.maximumValue = 6;
         this.segment = segment;
         this.segmentIdentity = DAYS_OF_WEEK;
     }
