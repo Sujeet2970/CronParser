@@ -6,7 +6,9 @@ import org.deliveroo.cronfields.CronField;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.deliveroo.constants.Separator.*;
+import static org.deliveroo.constants.Separator.RANGE;
+import static org.deliveroo.constants.Separator.STEP;
+import static org.deliveroo.constants.Separator.WILDCARD;
 import static org.deliveroo.util.ValidateValue.isValueInRange;
 
 public class CronFieldStepExpander extends CronFieldExpander {

@@ -38,14 +38,15 @@ public class CronParser {
     public String parse() {
         String[] parts = cronString.split(SPACE, SEGMENT_LIMIT);
         if (parts.length != SEGMENT_LIMIT) {
-            throw new IllegalArgumentException("Invalid cron string format.");
+            return new IllegalArgumentException("Invalid cron string format.").toString();
         }
+
         try {
             return parseString(parts);
         } catch (Exception ex) {
             System.out.println(ex.toString());
 
-            return "Error in parsing the given string";
+            return String.format("Error in parsing the expression : %s", cronString);
         }
     }
 

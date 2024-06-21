@@ -6,7 +6,7 @@ import org.deliveroo.cronfields.CronField;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.deliveroo.constants.Separator.*;
+import static org.deliveroo.constants.Separator.COMMA;
 import static org.deliveroo.constants.Separator.RANGE;
 import static org.deliveroo.util.ValidateValue.isValueInRange;
 
