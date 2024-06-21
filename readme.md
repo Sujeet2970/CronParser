@@ -1,27 +1,41 @@
-```
-Write a command line application or script which parses a cron string and expands each field to show the times at which it will run. You may use whichever language you feel most comfortable with.
-Please do not use existing cron parser libraries for this exercise. Whilst it’s generally a good idea to use pre-built libraries, we want to assess your ability to create your own!
-You should only consider the standard cron format with five time fields (minute, hour, day of month, month, and day of week) plus a command, and you do not need to handle the special time strings such as "@yearly". The input will be on a single line.
-The cron string will be passed to your application as a single argument.
-~$ your-program "d"
-The output should be formatted as a table with the field name taking the first 14 columns and
-the times as a space-separated list following it. For example, the following input argument:
+## Project Description
 
-Should yield the following output:
-   */15 0 1,15 * 1-5 /usr/bin/find
-```
-```
-minute       0 15 30 45
-hour         0
-day of month 1 15
-month        1 2 3 4 5 6 7 8 9 10 11 12 day of week 1 2345
-command      /usr/bin/find
-```
+### Cron String Parser
 
+This command line application parses a cron string and expands each field to display the times at which it will run. The application adheres to the standard cron format, which includes five time fields (minute, hour, day of month, month, and day of week) plus a command. The output is formatted as a table, where each field name is displayed in the first 14 columns followed by the corresponding times as a space-separated list.
 
-```
-You should spend no more than three hours on this exercise. If you do not have time to handle all possible cron strings then an app which handles a subset of them correctly is better than one which does not run or produces incorrect results. You will be asked to extend the solution with additional features in the interview, so please have your development environment ready in the way you like it, ready for screen sharing.
-You should see your project reviewer as a new team member you are handling the project over to. Provide everything you feel would be relevant for them to ramp up quickly, such as
-tests, a README and instructions for how to run your project in a clean OS X/Linux environment.
+### Features
+- Parses a cron string provided as a single argument.
+- Expands each field (minute, hour, day of month, month, day of week) to show the specific times when the cron expression matches.
+- Handles basic cron expressions without special time strings like "@yearly".
+- Outputs the expanded times in a structured table format for easy readability.
 
-```
+### Development Environment
+The application is developed in **Java** as a command line interface (CLI) tool. It does not use existing cron parser libraries to demonstrate the ability to create a parser from scratch.
+
+### Project Structure
+- **Main.java**: Entry point of the application that parses the cron string and prints the expanded schedule.
+- **CronParser.java**: Implements the logic to parse and expand the cron string into specific times.
+- **README.md**: Contains instructions for setting up and running the application, project description, and other relevant information.
+
+### Setup Instructions
+#### Prerequisites
+- **Java Development Kit (JDK)** installed (version 8 or higher).
+- **Apache Maven** installed to build the project.
+
+#### Running the Application
+1. **Clone the repository:**
+   ```bash
+   git clone <repository_url>
+   cd <repository_directory>
+2. **Execute the bash script run.sh with your desired argument:**
+    ```bash
+    ./run.sh "*.15 0 1,15 * 1-5 .usr.bin.find"
+3. **Output
+    ```bash
+    minute      0 15 30 45
+    hour        0
+    day of month 1 15
+    month       1 2 3 4 5 6 7 8 9 10 11 12
+    day of week 1 2 3 4 5
+    command     /usr/bin/find
