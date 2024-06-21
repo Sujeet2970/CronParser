@@ -8,18 +8,15 @@ import org.deliveroo.cronfields.Minute;
 import org.deliveroo.cronfields.DaysOfWeek;
 import org.deliveroo.cronfields.DaysOfMonth;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.deliveroo.constants.Columns.MONTH;
-import static org.deliveroo.constants.Columns.DAY_OF_MONTH;
-import static org.deliveroo.constants.Columns.MINUTE;
-import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
-import static org.deliveroo.constants.Columns.HOUR;
-import static org.deliveroo.constants.Columns.COMMAND;
+import static org.deliveroo.constants.Columns.*;
 import static org.deliveroo.constants.Separator.SPACE;
 import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
+import static org.deliveroo.util.ValidateCronExpression.validate;
 
 /**
  * The {@code CronParser} class parses a cron expression string into its constituent parts
@@ -41,11 +38,10 @@ public class CronParser {
     private static final Integer MONTH_PART_INDEX = 3;
     private static final Integer DAY_OF_WEEK_PART_INDEX = 4;
     private static final Integer COMMAND_PART_INDEX = 5;
-    private static final Integer SEGMENT_LIMIT = 6;
     private static final Map<String, List<String>> displayString = new HashMap<>();
     private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAYS_OF_WEEK);
 
-    private final String cronString;
+    private final String cronExpression;
 
 
     /**
@@ -54,19 +50,13 @@ public class CronParser {
      *
      * @return the formatted string or an error message if the cron string is invalid.
      */
-    public String parse() {
-        String[] parts = cronString.split(SPACE, SEGMENT_LIMIT);
-        if (parts.length != SEGMENT_LIMIT) {
-            return new IllegalArgumentException("Invalid cron string format.").toString();
+    public String parse() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException{
+        String[] parts = cronExpression.split(SPACE, SEGMENT_LIMIT);
+        if(validate(cronExpression)) {
+            throw new IllegalArgumentException("Invalid cron string format");
         }
 
-        try {
-            return parseString(parts);
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-
-            return String.format("Error in parsing the expression : %s", cronString);
-        }
+        return parseString(parts);
     }
 
     private static String parseString(String[] parts) {

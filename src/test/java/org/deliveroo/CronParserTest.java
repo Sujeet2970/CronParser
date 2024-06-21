@@ -3,12 +3,14 @@ package org.deliveroo;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CronParserTest {
     @Test
-    public void testSimpleCronExpression() {
+    public void testSimpleCronExpression() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         assertEquals(new CronParser("0-59/15 0 1,5 * 1-5 /usr/bin/find").parse(),
                 """
                         minute         0 15 30 45
@@ -22,7 +24,7 @@ public class CronParserTest {
     }
 
     @Test
-    public void testCronExpressionWithComplexLists() {
+    public void testCronExpressionWithComplexLists() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         assertEquals(new CronParser("0-59/15 0 1-5,1-15 * 1-5 /usr/bin/find").parse(),
                 """
                         minute         0 15 30 45
@@ -33,5 +35,13 @@ public class CronParserTest {
                         command        /usr/bin/find
                         """
         );
+    }
+
+    @Test
+    public void testCronExpressionWithInvalidInput() throws InvocationTargetException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException {
+        assertThrows(NumberFormatException.class, () -> {
+            new CronParser("0-59/15 0 1-5,1-15 * abc /usr/bin/find").parse();
+        });
     }
 }

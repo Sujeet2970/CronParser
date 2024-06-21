@@ -1,7 +1,9 @@
 package org.deliveroo;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         if (args.length != 1) {
             System.err.println("Error due to the number of args size is not equal to 1");
             System.exit(1);
