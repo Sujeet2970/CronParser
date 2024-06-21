@@ -21,6 +21,18 @@ import static org.deliveroo.constants.Columns.COMMAND;
 import static org.deliveroo.constants.Separator.SPACE;
 import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
 
+/**
+ * The {@code CronParser} class parses a cron expression string into its constituent parts
+ * and formats them for display.
+ * <p>
+ * The cron string is expected to follow the standard cron format with five time fields
+ * (minute, hour, day of month, month, day of week) followed by a command.
+ * <p>
+ * This class uses {@code lombok.RequiredArgsConstructor} to automatically generate a constructor
+ * for the {@code cronString} field.
+ * <p>
+ */
+
 @RequiredArgsConstructor
 public class CronParser {
     private static final Integer MINUTE_PART_INDEX = 0;
@@ -35,6 +47,13 @@ public class CronParser {
 
     private final String cronString;
 
+
+    /**
+     * Parses the cron string and returns a formatted string representing the expanded cron fields.
+     * If the cron string is invalid, an error message is returned.
+     *
+     * @return the formatted string or an error message if the cron string is invalid.
+     */
     public String parse() {
         String[] parts = cronString.split(SPACE, SEGMENT_LIMIT);
         if (parts.length != SEGMENT_LIMIT) {
