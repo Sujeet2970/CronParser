@@ -53,7 +53,7 @@ public class CronParser {
      * Parses the cron string and returns a formatted string representing the expanded cron fields.
      * If the cron string is invalid, an error message is returned.
      *
-     * @return the formatted string or an error message if the cron string is invalid.
+     * @return the formatted string or exception if anything goes wrong.
      */
     public String parse() throws IllegalArgumentException {
         String[] parts = cronString.split(SPACE, SEGMENT_LIMIT);
