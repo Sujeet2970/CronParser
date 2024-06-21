@@ -31,11 +31,11 @@ The application is developed in **Java** as a command line interface (CLI) tool.
 2. **Execute the bash script run.sh with your desired argument:**
     ```bash
     ./run.sh "*.15 0 1,15 * 1-5 .usr.bin.find"
-3. **Output
+3. **Output**
     ```bash
-    minute      0 15 30 45
-    hour        0
+    minute       0 15 30 45
+    hour         0
     day of month 1 15
-    month       1 2 3 4 5 6 7 8 9 10 11 12
-    day of week 1 2 3 4 5
-    command     /usr/bin/find
+    month        1 2 3 4 5 6 7 8 9 10 11 12
+    day of week  1 2 3 4 5
+    command      /usr/bin/find
