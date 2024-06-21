@@ -16,12 +16,12 @@ public class CronFieldWildcardExpanderTest {
         List<String> expandedResult = expander.expandField(daysOfWeekField);
 
         assertEquals(7, expandedResult.size());
-        assertEquals("1", expandedResult.get(0));
-        assertEquals("2", expandedResult.get(1));
-        assertEquals("3", expandedResult.get(2));
-        assertEquals("4", expandedResult.get(3));
-        assertEquals("5", expandedResult.get(4));
-        assertEquals("6", expandedResult.get(5));
-        assertEquals("7", expandedResult.get(6));
+        assertEquals("0", expandedResult.get(0));
+        assertEquals("1", expandedResult.get(1));
+        assertEquals("2", expandedResult.get(2));
+        assertEquals("3", expandedResult.get(3));
+        assertEquals("4", expandedResult.get(4));
+        assertEquals("5", expandedResult.get(5));
+        assertEquals("6", expandedResult.get(6));
     }
 }
