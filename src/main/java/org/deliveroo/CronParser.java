@@ -8,7 +8,6 @@ import org.deliveroo.cronfields.Minute;
 import org.deliveroo.cronfields.DaysOfWeek;
 import org.deliveroo.cronfields.DaysOfMonth;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

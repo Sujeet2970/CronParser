@@ -34,17 +34,6 @@ public class CronFieldRangeExpander extends CronFieldExpander {
         int startValue = Integer.parseInt(range[START_VALUE_INDEX]);
         int endValue = Integer.parseInt(range[END_VALUE_INDEX]);
 
-        if(startValue < endValue ) {
-            getAllPossibleValues(cronField, startValue, endValue, result);
-        } else {
-            getAllPossibleValues(cronField, startValue, cronField.getMaximumValue(), result);
-            getAllPossibleValues(cronField, cronField.getMinimumValue(), endValue, result);
-        }
-
-        return result;
-    }
-
-    private static void getAllPossibleValues(CronField cronField, int startValue, int endValue, List<String> result) {
         for (int value = startValue; value <= endValue; value++) {
             if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
                 throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
@@ -52,5 +41,7 @@ public class CronFieldRangeExpander extends CronFieldExpander {
 
             result.add(String.valueOf(value));
         }
+
+        return result;
     }
 }
