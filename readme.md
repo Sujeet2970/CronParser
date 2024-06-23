@@ -28,9 +28,9 @@ The application is developed in **Java** as a command line interface (CLI) tool.
    ```bash
    git clone <repository_url>
    cd <repository_directory>
-2. **Execute the bash script run.sh with your desired argument:**
+2. **Execute the bash script run-cron-parser.sh with your desired argument:**
     ```bash
-    ./run.sh "*.15 0 1,15 * 1-5 .usr.bin.find"
+    ./run-cron-parser.sh "*/15 0 1,15 * 1-5 /usr/bin/find"
 3. **Output**
     ```bash
     minute       0 15 30 45
