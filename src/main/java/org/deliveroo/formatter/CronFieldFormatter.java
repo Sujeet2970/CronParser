@@ -20,7 +20,7 @@ public class CronFieldFormatter {
      * @return a formatted string representing the cron field and its values.
      */
     public static String getFormattedRowData(@NonNull String fieldName, @NonNull List<String> values) {
-        return String.format("%-14s %s%n", fieldName, String.join(SPACE, values));
+        return String.format("%-13s %s%n", fieldName, String.join(SPACE, values));
     }
 
     /**
@@ -31,6 +31,6 @@ public class CronFieldFormatter {
      * @return a formatted string representing the cron field and its value.
      */
     public static String getFormattedRowData(@NonNull String fieldName, @NonNull String value) {
-        return String.format("%-14s %s%n", fieldName, value);
+        return String.format("%-13s %s%n", fieldName, value);
     }
 }
