@@ -44,4 +44,19 @@ public class CronParserTest {
             new CronParser("0-59/15 0 1-5,1-15 * abc /usr/bin/find").parse();
         });
     }
+
+    @Test
+    public void testCronExpressionWithDifferentScenario() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        assertEquals(new CronParser("*/15 0 1,2,4-5,*/2 * * /usr/bin/find").parse(),
+                """
+                        minute        0 15 30 45
+                        hour          0
+                        day of month  1 2 3 4 5 7 9 11 13 15 17 19 21 23 25 27 29 31
+                        month         1 2 3 4 5 6 7 8 9 10 11 12
+                        day of week   0 1 2 3 4 5 6
+                        command       /usr/bin/find
+                        """
+        );
+    }
+
 }

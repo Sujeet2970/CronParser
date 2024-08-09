@@ -9,42 +9,36 @@ import java.util.List;
 import static org.deliveroo.util.ValidateValue.isValueInRange;
 
 /**
- * The {@code CronFieldWildcardExpander} class is responsible for expanding cron fields
- * that contain wildcard values. It generates a list of all possible values within the
- * specified range for the given cron field.
- *
- * <p>This class extends the {@link CronFieldExpander} and provides an implementation
- * for the {@code expandField} method to handle wildcard expansion.
- *
- * <p>Example usage:
- * <pre>
- *     CronField cronField = new CronField("minute", 0, 59);
- *     CronFieldWildcardExpander expander = new CronFieldWildcardExpander();
- *     List&lt;String&gt; expandedValues = expander.expandField(cronField);
- * </pre>
- *
- * @see CronFieldExpander
- * @see CronField
+ * Expands cron fields containing wildcard values, generating a list of all possible
+ * values within the specified range.
+ * <p>
+ * This class extends {@link CronFieldExpander} and implements the {@code expandField}
+ * method to handle wildcard expansions, producing every valid value in the cron field's range.
+ * </p>
  */
 public class CronFieldWildcardExpander extends CronFieldExpander {
     /**
-     * Expands the given cron field containing a wildcard into a list of all possible values
+     * Expands a cron field segment containing a wildcard into a list of all possible values
      * within the specified range.
+     * <p>
+     * Iterates over the range defined by the cron field and validates each value before adding
+     * it to the result list. Throws an {@link OutOfRangeException} if any value is outside the allowed range.
+     * </p>
      *
-     * @param cronField the cron field to be expanded
-     * @return a list of strings representing all possible values for the given cron field
+     * @param cronField the cron field to expand
+     * @return a list of integers representing all possible values within the cron field's range
      * @throws OutOfRangeException if any value is out of the valid range specified by the cron field
      */
     @Override
-    public List<String> expandField(CronField cronField) {
-        List<String> result = new ArrayList<>();
+    public List<Integer> expandField(CronField cronField) {
+        List<Integer> result = new ArrayList<>();
 
         for (int value = cronField.getMinimumValue(); value <= cronField.getMaximumValue(); value++) {
             if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
                 throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
             }
 
-            result.add(String.valueOf(value));
+            result.add(value);
         }
 
         return result;

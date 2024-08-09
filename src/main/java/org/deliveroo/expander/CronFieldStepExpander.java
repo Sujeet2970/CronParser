@@ -14,26 +14,28 @@ import static org.deliveroo.util.ValidateValue.isValueInRange;
 /**
  * Expands cron field segments that include step values.
  * <p>
- * This class is responsible for expanding cron expressions with step values,
- * such as "1-10/2", which means "every 2 units between 1 and 10".
+ * Handles cron expressions like "1-10/2", expanding them to include all valid
+ * values within the specified range, incremented by the step value.
  * </p>
  */
 public class CronFieldStepExpander extends CronFieldExpander {
     /**
-     * Expands the cron field segment with step values.
+     * Expands a cron field segment that includes a step value.
      * <p>
-     * The method parses the step value, expands the range according to the step,
-     * and returns a list of all valid values within the range, incremented by the step.
+     * Parses the segment to extract the step value and the range. Expands the
+     * range by incrementing with the step value and returns the resulting list
+     * of integers. Validates each value to ensure it falls within the allowed
+     * range for the cron field.
      * </p>
      *
      * @param cronField the cron field containing the segment to expand
-     * @return a list of expanded values as strings
+     * @return a list of expanded integer values
      * @throws NumberFormatException if the step value or range values are not valid integers
      * @throws OutOfRangeException if any value in the expanded list is out of the allowed range
      */
     @Override
-    public List<String> expandField(CronField cronField) {
-        List<String> result = new ArrayList<>();
+    public List<Integer> expandField(CronField cronField) {
+        List<Integer> result = new ArrayList<>();
 
         String[] parts = cronField.getSegment().split(STEP);
         int step = Integer.parseInt(parts[1]);
@@ -46,7 +48,7 @@ public class CronFieldStepExpander extends CronFieldExpander {
                 throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
             }
 
-            result.add(String.valueOf(value));
+            result.add(value);
         }
 
         return result;

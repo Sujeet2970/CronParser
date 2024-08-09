@@ -13,11 +13,11 @@ public class CronFieldStepExpanderTest {
     public void sanityTest() {
         CronField minutesField = new Minute("0-40/15");
         CronFieldStepExpander expander = new CronFieldStepExpander();
-        List<String> expandedResult = expander.expandField(minutesField);
+        List<Integer> expandedResult = expander.expandField(minutesField);
 
         assertEquals(3, expandedResult.size());
-        assertEquals("0", expandedResult.get(0));
-        assertEquals("15", expandedResult.get(1));
-        assertEquals("30", expandedResult.get(2));
+        assertEquals(Integer.valueOf(0), expandedResult.get(0));
+        assertEquals(Integer.valueOf(15), expandedResult.get(1));
+        assertEquals(Integer.valueOf(30), expandedResult.get(2));
     }
 }

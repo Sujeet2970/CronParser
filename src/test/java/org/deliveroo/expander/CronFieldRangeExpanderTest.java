@@ -15,13 +15,13 @@ public class CronFieldRangeExpanderTest {
     public void sanityTest() {
         CronField daysOfWeekField = new DaysOfWeek("1-4");
         CronFieldRangeExpander expander = new CronFieldRangeExpander();
-        List<String> expandedResult = expander.expandField(daysOfWeekField);
+        List<Integer> expandedResult = expander.expandField(daysOfWeekField);
 
         assertEquals(4, expandedResult.size());
-        assertEquals("1", expandedResult.get(0));
-        assertEquals("2", expandedResult.get(1));
-        assertEquals("3", expandedResult.get(2));
-        assertEquals("4", expandedResult.get(3));
+        assertEquals(Integer.valueOf(1), expandedResult.get(0));
+        assertEquals(Integer.valueOf(2), expandedResult.get(1));
+        assertEquals(Integer.valueOf(3), expandedResult.get(2));
+        assertEquals(Integer.valueOf(4), expandedResult.get(3));
     }
 
     @Test

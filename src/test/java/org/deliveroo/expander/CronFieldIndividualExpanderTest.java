@@ -12,19 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CronFieldIndividualExpanderTest {
     @Test
     public void sanityTest() {
-        CronField daysOfWeekField = new DaysOfWeek("1,5,6");
+        CronField daysOfWeekField = new DaysOfWeek("1");
         CronFieldIndividualExpander expander = new CronFieldIndividualExpander();
-        List<String> expandedResult = expander.expandField(daysOfWeekField);
+        List<Integer> expandedResult = expander.expandField(daysOfWeekField);
 
-        assertEquals(3, expandedResult.size());
-        assertEquals("1", expandedResult.get(0));
-        assertEquals("5", expandedResult.get(1));
-        assertEquals("6", expandedResult.get(2));
+        assertEquals(1, expandedResult.size());
+        assertEquals(Integer.valueOf(1), expandedResult.get(0));
     }
 
     @Test
     public void testCronExpressionWithInvalidInput() {
-        CronField daysOfWeekField = new DaysOfWeek("3,abc");
+        CronField daysOfWeekField = new DaysOfWeek("abc");
         CronFieldIndividualExpander expander = new CronFieldIndividualExpander();
 
         assertThrows(NumberFormatException.class, () -> {

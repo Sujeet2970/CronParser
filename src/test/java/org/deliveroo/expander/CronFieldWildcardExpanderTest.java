@@ -13,15 +13,15 @@ public class CronFieldWildcardExpanderTest {
     public void sanityTest() {
         CronField daysOfWeekField = new DaysOfWeek("*");
         CronFieldWildcardExpander expander = new CronFieldWildcardExpander();
-        List<String> expandedResult = expander.expandField(daysOfWeekField);
+        List<Integer> expandedResult = expander.expandField(daysOfWeekField);
 
         assertEquals(7, expandedResult.size());
-        assertEquals("0", expandedResult.get(0));
-        assertEquals("1", expandedResult.get(1));
-        assertEquals("2", expandedResult.get(2));
-        assertEquals("3", expandedResult.get(3));
-        assertEquals("4", expandedResult.get(4));
-        assertEquals("5", expandedResult.get(5));
-        assertEquals("6", expandedResult.get(6));
+        assertEquals(Integer.valueOf(0), expandedResult.get(0));
+        assertEquals(Integer.valueOf(1), expandedResult.get(1));
+        assertEquals(Integer.valueOf(2), expandedResult.get(2));
+        assertEquals(Integer.valueOf(3), expandedResult.get(3));
+        assertEquals(Integer.valueOf(4), expandedResult.get(4));
+        assertEquals(Integer.valueOf(5), expandedResult.get(5));
+        assertEquals(Integer.valueOf(6), expandedResult.get(6));
     }
 }
