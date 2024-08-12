@@ -34,10 +34,10 @@ public class CronFieldStepExpander extends CronFieldExpander {
      * @throws OutOfRangeException if any value in the expanded list is out of the allowed range
      */
     @Override
-    public List<Integer> expandField(CronField cronField) {
+    public List<Integer> expandField(CronField cronField, String segment) {
         List<Integer> result = new ArrayList<>();
 
-        String[] parts = cronField.getSegment().split(STEP);
+        String[] parts = segment.split(STEP);
         int step = Integer.parseInt(parts[1]);
         String range = parts[0];
         int rangeStart = range.equals(WILDCARD) ? cronField.getMinimumValue() : Integer.parseInt(range.split(RANGE)[0]);
@@ -45,7 +45,7 @@ public class CronFieldStepExpander extends CronFieldExpander {
 
         for (int value = rangeStart; value <= rangeEnd; value += step) {
             if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
-                throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
+                throw new OutOfRangeException(cronField.getFieldIdentity(), value);
             }
 
             result.add(value);

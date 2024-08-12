@@ -7,16 +7,16 @@ import static org.deliveroo.constants.Columns.HOUR;
  */
 public class Hour extends CronField {
     /**
-     * Constructs an {@code Hour} object with the specified segment.
-     * Sets the valid range to 0-23 and the segment identity to {@code HOUR}.
+     * Constructs an {@code Hour} object with the specified fieldExpression.
+     * Sets the valid range to 0-23 and the field identity to {@code HOUR}.
      *
-     * @param segment the cron segment for hours
+     * @param fieldExpression the cron fieldExpression for hours
      */
-    public Hour(String segment) {
+    public Hour(String fieldExpression) {
         super();
         this.minimumValue = 0; // Hours are from 0 to 23
         this.maximumValue = 23;
-        this.segment = segment;
-        this.segmentIdentity = HOUR;
+        this.fieldExpression = fieldExpression;
+        this.fieldIdentity = HOUR;
     }
 }

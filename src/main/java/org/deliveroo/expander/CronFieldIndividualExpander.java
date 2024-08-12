@@ -20,14 +20,15 @@ public class CronFieldIndividualExpander extends CronFieldExpander {
      * @throws OutOfRangeException if the value is out of the allowed range
      */
     @Override
-    public List<Integer> expandField(CronField cronField) {
-        int number = Integer.parseInt(cronField.getSegment());
+    public List<Integer> expandField(CronField cronField, String segment) {
+        int number = Integer.parseInt(segment);
         if(number <= cronField.getMaximumValue() && number >= cronField.getMinimumValue()) {
             List<Integer> array = new ArrayList<>();
             array.add(number);
+
             return array;
         } else {
-            throw new OutOfRangeException(cronField.getSegmentIdentity(), number);
+            throw new OutOfRangeException(cronField.getFieldIdentity(), number);
         }
     }
 }

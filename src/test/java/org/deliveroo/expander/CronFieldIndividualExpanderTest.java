@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CronFieldIndividualExpanderTest {
     @Test
     public void sanityTest() {
-        CronField daysOfWeekField = new DaysOfWeek("1");
+        CronField daysOfWeekField = new DaysOfWeek("1,2,6-10");
         CronFieldIndividualExpander expander = new CronFieldIndividualExpander();
-        List<Integer> expandedResult = expander.expandField(daysOfWeekField);
+        List<Integer> expandedResult = expander.expandField(daysOfWeekField, "1");
 
         assertEquals(1, expandedResult.size());
         assertEquals(Integer.valueOf(1), expandedResult.get(0));
@@ -26,7 +26,7 @@ public class CronFieldIndividualExpanderTest {
         CronFieldIndividualExpander expander = new CronFieldIndividualExpander();
 
         assertThrows(NumberFormatException.class, () -> {
-            expander.expandField(daysOfWeekField);
+            expander.expandField(daysOfWeekField, "abc");
         });
     }
 }

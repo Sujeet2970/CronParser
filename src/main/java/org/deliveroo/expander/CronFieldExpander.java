@@ -18,7 +18,7 @@ public abstract class CronFieldExpander {
      * @return a list of integers representing the expanded cron field
      * @throws UnsupportedOperationException if not overridden in a subclass
      */
-    public List<Integer> expandField(CronField cronField) {
+    public List<Integer> expandField(CronField cronField, String segment) {
         throw new UnsupportedOperationException("This method should be overridden in subclass");
     }
 }

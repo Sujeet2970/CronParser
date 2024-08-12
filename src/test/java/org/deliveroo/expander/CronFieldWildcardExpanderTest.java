@@ -13,7 +13,7 @@ public class CronFieldWildcardExpanderTest {
     public void sanityTest() {
         CronField daysOfWeekField = new DaysOfWeek("*");
         CronFieldWildcardExpander expander = new CronFieldWildcardExpander();
-        List<Integer> expandedResult = expander.expandField(daysOfWeekField);
+        List<Integer> expandedResult = expander.expandField(daysOfWeekField, "*");
 
         assertEquals(7, expandedResult.size());
         assertEquals(Integer.valueOf(0), expandedResult.get(0));

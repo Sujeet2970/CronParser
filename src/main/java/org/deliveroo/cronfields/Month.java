@@ -7,16 +7,16 @@ import static org.deliveroo.constants.Columns.MONTH;
  */
 public class Month extends CronField {
     /**
-     * Constructs a {@code Month} object with the specified segment.
-     * Sets the valid range to 1-12 and the segment identity to {@code MONTH}.
+     * Constructs a {@code Month} object with the specified fieldExpression.
+     * Sets the valid range to 1-12 and the field identity to {@code MONTH}.
      *
-     * @param segment the cron segment for months
+     * @param fieldExpression the cron fieldExpression for months
      */
-    public Month(String segment) {
+    public Month(String fieldExpression) {
         super();
         this.minimumValue = 1; // Months are from 1 to 12
         this.maximumValue = 12;
-        this.segment = segment;
-        this.segmentIdentity = MONTH;
+        this.fieldExpression = fieldExpression;
+        this.fieldIdentity = MONTH;
     }
 }

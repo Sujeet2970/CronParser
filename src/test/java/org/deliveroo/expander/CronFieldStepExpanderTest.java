@@ -13,7 +13,7 @@ public class CronFieldStepExpanderTest {
     public void sanityTest() {
         CronField minutesField = new Minute("0-40/15");
         CronFieldStepExpander expander = new CronFieldStepExpander();
-        List<Integer> expandedResult = expander.expandField(minutesField);
+        List<Integer> expandedResult = expander.expandField(minutesField, "0-40/15");
 
         assertEquals(3, expandedResult.size());
         assertEquals(Integer.valueOf(0), expandedResult.get(0));

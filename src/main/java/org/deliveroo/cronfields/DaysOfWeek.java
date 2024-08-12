@@ -7,16 +7,16 @@ import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
  */
 public class DaysOfWeek extends CronField {
     /**
-     * Constructs a {@code DaysOfWeek} with the specified segment.
-     * Sets the valid range to 0-6 and the segment identity to {@code DAYS_OF_WEEK}.
+     * Constructs a {@code DaysOfWeek} with the specified fieldExpression.
+     * Sets the valid range to 0-6 and the field identity to {@code DAYS_OF_WEEK}.
      *
-     * @param segment the cron segment for days of the week
+     * @param fieldExpression the cron fieldExpression for days of the week
      */
-    public DaysOfWeek(String segment) {
+    public DaysOfWeek(String fieldExpression) {
         super();
         this.minimumValue = 0; // Days of week are from 0 (Sunday) to 6 (Saturday)
         this.maximumValue = 6;
-        this.segment = segment;
-        this.segmentIdentity = DAYS_OF_WEEK;
+        this.fieldExpression = fieldExpression;
+        this.fieldIdentity = DAYS_OF_WEEK;
     }
 }

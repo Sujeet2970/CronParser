@@ -1,5 +1,6 @@
 package org.deliveroo.expander;
 
+import org.deliveroo.exception.InvalidInputException;
 import org.deliveroo.exception.OutOfRangeException;
 import org.deliveroo.cronfields.CronField;
 
@@ -30,15 +31,19 @@ public class CronFieldRangeExpander extends CronFieldExpander {
      * @throws OutOfRangeException if any value is out of the allowed range
      */
     @Override
-    public List<Integer> expandField(CronField cronField) {
+    public List<Integer> expandField(CronField cronField, String segment) {
         List<Integer> result = new ArrayList<>();
-        String[] range = cronField.getSegment().split(RANGE);
+        String[] range = segment.split(RANGE);
         int startValue = Integer.parseInt(range[START_VALUE_INDEX]);
         int endValue = Integer.parseInt(range[END_VALUE_INDEX]);
 
+        if(endValue < startValue) {
+            throw new InvalidInputException(cronField.getFieldExpression(), cronField.getFieldIdentity());
+        }
+
         for (int value = startValue; value <= endValue; value++) {
             if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
-                throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
+                throw new OutOfRangeException(cronField.getFieldIdentity(), value);
             }
 
             result.add(value);

@@ -30,12 +30,12 @@ public class CronFieldWildcardExpander extends CronFieldExpander {
      * @throws OutOfRangeException if any value is out of the valid range specified by the cron field
      */
     @Override
-    public List<Integer> expandField(CronField cronField) {
+    public List<Integer> expandField(CronField cronField, String segment) {
         List<Integer> result = new ArrayList<>();
 
         for (int value = cronField.getMinimumValue(); value <= cronField.getMaximumValue(); value++) {
             if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
-                throw new OutOfRangeException(cronField.getSegmentIdentity(), value);
+                throw new OutOfRangeException(cronField.getFieldIdentity(), value);
             }
 
             result.add(value);

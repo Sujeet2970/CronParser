@@ -23,10 +23,10 @@ public abstract class CronField {
     private static final CronFieldExpander STEP_EXPANDER = new CronFieldStepExpander();
     private static final CronFieldExpander INDIVIDUAL_EXPANDER = new CronFieldIndividualExpander();
 
-    protected String segmentIdentity;
+    protected String fieldIdentity;
     protected Integer minimumValue;
     protected Integer maximumValue;
-    protected String segment;
+    protected String fieldExpression;
     /**
      * Expands the cron field segment into a list of individual string values.
      * <p>
@@ -40,28 +40,26 @@ public abstract class CronField {
     public List<String> expandField() {
         CronFieldExpander expander;
 
-        String[] parts = this.getSegment().split(COMMA);
+        String[] segments = this.getFieldExpression().split(COMMA);
         Set<Integer> results = new HashSet<>();
 
-        for(String part : parts) {
-            if (part.equals(WILDCARD)) {
+        for(String segment : segments) {
+            if (segment.equals(WILDCARD)) {
                 expander = WILDCARD_EXPANDER;
-            } else if (part.contains(STEP)) {
+            } else if (segment.contains(STEP)) {
                 expander = STEP_EXPANDER;
-            }  else if (part.contains(RANGE)) {
+            }  else if (segment.contains(RANGE)) {
                 expander = RANGE_EXPANDER;
             } else {
                 expander = INDIVIDUAL_EXPANDER;
             }
 
-            this.segment = part;
-            results.addAll(expander.expandField(this));
+            results.addAll(expander.expandField(this, segment));
         }
 
         ArrayList<Integer> arrayList = new ArrayList<>(results);
         Collections.sort(arrayList);
 
         return arrayList.stream().map(String::valueOf).collect(Collectors.toList());
-
     }
 }
