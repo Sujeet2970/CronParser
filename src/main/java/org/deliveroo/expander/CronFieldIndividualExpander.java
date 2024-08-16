@@ -5,6 +5,8 @@ import org.deliveroo.cronfields.CronField;
 
 import java.util.*;
 
+import static org.deliveroo.util.ValidateValue.isValueInRange;
+
 /**
  * Expands individual cron field segments into a list of integer values.
  * Handles single values by validating them against the field's allowed range.
@@ -22,7 +24,7 @@ public class CronFieldIndividualExpander extends CronFieldExpander {
     @Override
     public List<Integer> expandField(CronField cronField, String segment) {
         int number = Integer.parseInt(segment);
-        if(number <= cronField.getMaximumValue() && number >= cronField.getMinimumValue()) {
+        if(isValueInRange(number, cronField.getMinimumValue(), cronField.getMaximumValue())) {
             List<Integer> array = new ArrayList<>();
             array.add(number);
 
