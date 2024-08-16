@@ -34,10 +34,6 @@ public class CronFieldWildcardExpander extends CronFieldExpander {
         List<Integer> result = new ArrayList<>();
 
         for (int value = cronField.getMinimumValue(); value <= cronField.getMaximumValue(); value++) {
-            if(!isValueInRange(value, cronField.getMinimumValue(), cronField.getMaximumValue())) {
-                throw new OutOfRangeException(cronField.getFieldIdentity(), value);
-            }
-
             result.add(value);
         }
 
