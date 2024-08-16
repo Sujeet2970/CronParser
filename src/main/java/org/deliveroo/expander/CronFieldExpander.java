@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Abstract base class for expanding cron fields.
- * Subclasses must override the {@link #expandField(CronField)} method to provide
+ * Subclasses must override the {@link #expandField(CronField, String)} method to provide
  * specific expansion logic for different cron field types.
  */
 public abstract class CronFieldExpander {

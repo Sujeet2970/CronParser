@@ -24,14 +24,10 @@ The application is developed in **Java** as a command line interface (CLI) tool.
 - **Apache Maven** installed to build the project.
 
 #### Running the Application
-1. **Clone the repository:**
-   ```bash
-   git clone <repository_url>
-   cd <repository_directory>
-2. **Execute the bash script run-cron-parser.sh with your desired argument:**
+1. **Execute the bash script run-cron-parser.sh with your desired argument:**
     ```bash
     ./run-cron-parser.sh "*/15 0 1,15 * 1-5 /usr/bin/find"
-3. **Output**
+2. **Output**
     ```bash
     minute        0 15 30 45
     hour          0

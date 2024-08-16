@@ -41,7 +41,7 @@ public abstract class CronField {
         CronFieldExpander expander;
 
         String[] segments = this.getFieldExpression().split(COMMA);
-        Set<Integer> results = new HashSet<>();
+        Set<Integer> results = new LinkedHashSet<>();
 
         for(String segment : segments) {
             if (segment.equals(WILDCARD)) {
