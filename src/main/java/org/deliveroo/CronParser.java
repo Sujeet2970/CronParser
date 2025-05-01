@@ -19,7 +19,7 @@ import static org.deliveroo.constants.Columns.DAYS_OF_WEEK;
 import static org.deliveroo.constants.Columns.HOUR;
 import static org.deliveroo.constants.Columns.COMMAND;
 import static org.deliveroo.constants.Separator.SPACE;
-import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
+import static org.deliveroo.formatter.CronFormatter.getFormattedRowData;
 
 /**
  * The {@code CronParser} class parses a cron expression string into its constituent parts
@@ -35,12 +35,12 @@ import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
 
 @RequiredArgsConstructor
 public class CronParser {
-    private static final Integer MINUTE_PART_INDEX = 0;
-    private static final Integer HOUR_PART_INDEX = 1;
-    private static final Integer DAY_OF_MONTH_PART_INDEX = 2;
-    private static final Integer MONTH_PART_INDEX = 3;
-    private static final Integer DAY_OF_WEEK_PART_INDEX = 4;
-    private static final Integer COMMAND_PART_INDEX = 5;
+    private static final Integer MINUTE_FIELD_INDEX = 0;
+    private static final Integer HOUR_FIELD_INDEX = 1;
+    private static final Integer DAY_OF_MONTH_FIELD_INDEX = 2;
+    private static final Integer MONTH_FIELD_INDEX = 3;
+    private static final Integer DAY_OF_WEEK_FIELD_INDEX = 4;
+    private static final Integer COMMAND_FIELD_INDEX = 5;
     private static final Integer SEGMENT_LIMIT = 6;
     private static final Map<String, List<String>> displayString = new HashMap<>();
     private static final List<String> DISPLAY_ORDER = List.of(MINUTE, HOUR, DAY_OF_MONTH, MONTH, DAYS_OF_WEEK);
@@ -63,26 +63,19 @@ public class CronParser {
         return parseString(parts);
     }
 
-    private static String parseString(String[] parts) {
-        String minutePart = parts[MINUTE_PART_INDEX];
-        String hourPart = parts[HOUR_PART_INDEX];
-        String dayOfMonthPart = parts[DAY_OF_MONTH_PART_INDEX];
-        String monthPart = parts[MONTH_PART_INDEX];
-        String dayOfWeekPart = parts[DAY_OF_WEEK_PART_INDEX];
-        String command = parts[COMMAND_PART_INDEX];
-
-        displayString.put(MINUTE, new Minute(minutePart).expandField());
-        displayString.put(HOUR, new Hour(hourPart).expandField());
-        displayString.put(DAY_OF_MONTH, new DaysOfMonth(dayOfMonthPart).expandField());
-        displayString.put(MONTH, new Month(monthPart).expandField());
-        displayString.put(DAYS_OF_WEEK, new DaysOfWeek(dayOfWeekPart).expandField());
+    private static String parseString(String[] fields) {
+        displayString.put(MINUTE, new Minute(fields[MINUTE_FIELD_INDEX]).expandField());
+        displayString.put(HOUR, new Hour(fields[HOUR_FIELD_INDEX]).expandField());
+        displayString.put(DAY_OF_MONTH, new DaysOfMonth(fields[DAY_OF_MONTH_FIELD_INDEX]).expandField());
+        displayString.put(MONTH, new Month(fields[MONTH_FIELD_INDEX]).expandField());
+        displayString.put(DAYS_OF_WEEK, new DaysOfWeek(fields[DAY_OF_WEEK_FIELD_INDEX]).expandField());
 
         StringBuilder displayContent = new StringBuilder();
         for(String field : DISPLAY_ORDER) {
             displayContent.append(getFormattedRowData(field, displayString.get(field)));
         }
 
-        displayContent.append(getFormattedRowData(COMMAND, command));
+        displayContent.append(getFormattedRowData(COMMAND, fields[COMMAND_FIELD_INDEX]));
 
         return displayContent.toString();
     }

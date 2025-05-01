@@ -2,7 +2,7 @@ package org.deliveroo.formatter;
 
 import org.junit.jupiter.api.Test;
 
-import static org.deliveroo.formatter.CronFieldFormatter.getFormattedRowData;
+import static org.deliveroo.formatter.CronFormatter.getFormattedRowData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Arrays;
 import java.util.Collections;

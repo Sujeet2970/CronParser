@@ -10,7 +10,7 @@ import static org.deliveroo.constants.Separator.SPACE;
  * Utility class for formatting cron field data into a specific display format.
  * Provides methods to format field names and corresponding values.
  */
-public class CronFieldFormatter {
+public class CronFormatter {
 
     /**
      * Formats a list of values associated with a cron field into a formatted string.
